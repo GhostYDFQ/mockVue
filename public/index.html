@@ -5,18 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <p>{{name}}</p>
+        <span>{{age}}</span>
+    </div>
     <script src="/dist/umd/vue.js"></script>
     <script>
         let vm = new Vue({
             el:"#app",
             data(){
             	return {
-            		name: [{a:1},{b:2},1],
-                    age: 212
+            		name: 'j',
+                    age: 25
                 }
-            },
-            component(){},
+            }
         })
     </script>
 </body>

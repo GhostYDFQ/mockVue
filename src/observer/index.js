@@ -1,9 +1,9 @@
-import { isObject } from '../utils/index';
+import { isObject,def } from '../utils/index';
 import { arrayMethods } from "./array";
 
 class Observe {
 	constructor(value){
-		value.__ob__ = this;
+		def(value,"__ob__",this);
 		if(Array.isArray(value)){
 			value.__proto__ = arrayMethods;
 			this.observeArray(value);
