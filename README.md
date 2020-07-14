@@ -1,1 +1,4 @@
 # mockVue
+
+## npm i
+

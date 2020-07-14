@@ -1,0 +1,32 @@
+{
+  "name": "mockVue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:dev": "rollup -c",
+    "serve": "cross-env ENV=development rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GhostYDFQ/mockVue.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GhostYDFQ/mockVue/issues"
+  },
+  "homepage": "https://github.com/GhostYDFQ/mockVue#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "cross-env": "^7.0.2",
+    "rollup": "^2.21.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-serve": "^1.0.1"
+  },
+  "dependencies": {
+    "vue": "^2.6.11"
+  }
+}
