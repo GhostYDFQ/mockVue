@@ -1,13 +1,12 @@
-const ncname = `[a-zA-Z_][\\-\\.0-9_a-zA-Z]*`;  // aaa-bbb
-const qnameCapture = `((?:${ncname}\\:)?${ncname})`; // <aaa:bbb>
-const startTagOpen = new RegExp(`^<${qnameCapture}`);
-const endTag = new RegExp(`^<\\/${qnameCapture}[^>]*>`);
-const attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/;
-const startTagClose = /^\s*(\/?)>/;
-const defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g;
+import { parseHTML, } from './parser-html';
+import { generate } from './generate';
 
 export function compileToFunction(template) {
-	return function render() {
-	
-	}
+	// 解析HTML，变成ast语法树
+	let root = parseHTML(template);
+	// 将ast语法树生成render函数，将ast树转成JS语法
+	let code = generate(root);
+	let renderFn = new Function(`with(this){ return ${code}}`);
+
+	return renderFn;
 }

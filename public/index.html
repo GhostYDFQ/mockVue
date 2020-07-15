@@ -5,17 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-    <div id="app">
-        <p>{{name}}</p>
+    <div id='app' style="color:red;background: yellow;">
+        <p>hello {{name}}</p>
         <span>{{age}}</span>
     </div>
     <script src="/dist/umd/vue.js"></script>
     <script>
         let vm = new Vue({
             el:"#app",
+            beforeCreate(){
+				console.log(this.name)
+            },
+            created(){
+            	console.log(this.name,this.$el);
+            },
             data(){
             	return {
-            		name: 'j',
+            		name: {name: 's'},
                     age: 25
                 }
             }

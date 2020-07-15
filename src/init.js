@@ -1,5 +1,7 @@
 import { initState } from './state';
-import { compileToFunction } from './compiler/index.js'
+import { compileToFunction } from './compiler/index.js';
+import { mountComponent, callHook } from './lifycycle';
+import { mergeOptions } from './utils/index';
 
 export function initMixin(Vue) {
 	// 整个vue的初始化,初始化的顺序 属性、方法、数据、计算属性、watch
@@ -7,9 +9,12 @@ export function initMixin(Vue) {
 		const vm = this;
 		vm.$options = options;
 		
+		vm.$options = mergeOptions(vm.constructor.options,options);
+		console.log(vm.$options);
 		// 初始化数据
+		callHook(vm,'beforeCreate');
 		initState(vm);
-		
+		callHook(vm,'created');
 		// 如果有el就要挂载
 		if(vm.$options.el){
 			vm.$mount(vm.$options.el);
@@ -27,6 +32,7 @@ export function initMixin(Vue) {
 			const render = compileToFunction(template);
 			options.render = render;
 		}
+		mountComponent(vm,el);
 	}
 }
 
