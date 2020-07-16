@@ -2,7 +2,7 @@ import { createElement, createTextNode } from './vdom/create-element';
 
 export function renderMixin(Vue) {
 	Vue.prototype._c = function(){ // 创建节点
-		return createElement(...arguments);
+		return createElement(this,...arguments);
 	};
 	Vue.prototype._v = function(text){ // 创建文本
 		return createTextNode(text);

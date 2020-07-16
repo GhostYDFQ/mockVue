@@ -2,6 +2,7 @@ import { initState } from './state';
 import { compileToFunction } from './compiler/index.js';
 import { mountComponent, callHook } from './lifycycle';
 import { mergeOptions } from './utils/index';
+import { nextTick } from './utils/next-tick';
 
 export function initMixin(Vue) {
 	// 整个vue的初始化,初始化的顺序 属性、方法、数据、计算属性、watch
@@ -10,7 +11,6 @@ export function initMixin(Vue) {
 		vm.$options = options;
 		
 		vm.$options = mergeOptions(vm.constructor.options,options);
-		console.log(vm.$options);
 		// 初始化数据
 		callHook(vm,'beforeCreate');
 		initState(vm);
@@ -33,6 +33,9 @@ export function initMixin(Vue) {
 			options.render = render;
 		}
 		mountComponent(vm,el);
-	}
+	};
+	
+	// 用户调用的nextTick
+	Vue.prototype.$nextTick = nextTick;
 }
 

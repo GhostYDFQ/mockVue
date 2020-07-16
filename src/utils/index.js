@@ -49,6 +49,18 @@ LIFYCYCLE_HOOKS.forEach(hook=>{
 	strats[hook] = mergeHook;
 });
 
+function mergeAssets(parentVal,childrenVal){
+	const res = Object.create(parentVal);
+	if(childrenVal){
+		for (let key in childrenVal){
+			res[key] = childrenVal[key]
+		}
+	}
+	return res;
+}
+
+strats.components = mergeAssets;
+
 export function mergeOptions(parent,children) {
 	const options = {};
 	for (let key in parent){
@@ -77,3 +89,12 @@ export function mergeOptions(parent,children) {
 	
 	return options;
 }
+
+export const isReserveTag = (tagName) => {
+	let str = 'p,div,span,input,button,img,ul,ol,li,a,em,i,b';
+	let obj = {};
+	str.split(',').forEach(tag=>{
+		obj[tag] = true;
+	});
+	return obj[tagName];
+};
